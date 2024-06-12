@@ -1,0 +1,8 @@
+# Git cache directory
+.git
+
+# Visual Studio cache directory
+.vs
+
+# Output directory
+out/
