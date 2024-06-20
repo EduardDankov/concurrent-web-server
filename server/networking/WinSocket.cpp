@@ -65,7 +65,15 @@ void networking::WinSocket::handleConnection(SOCKET clientSocket)
 		return;
 	}
 
-	global::requestLogger.log(std::this_thread::get_id(), "networking::WinSocket::handleConnection", buffer);
+	char addrBuffer[INET_ADDRSTRLEN];
+	inet_ntop(AF_INET, &(m_clientAddr.sin_addr), addrBuffer, INET_ADDRSTRLEN);
+
+	global::requestLogger.log(
+		std::this_thread::get_id(), 
+		"networking::WinSocket::handleConnection", 
+		addrBuffer,
+		buffer
+	);
 }
 
 networking::WinSocket::WinSocket()
