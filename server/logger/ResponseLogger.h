@@ -12,6 +12,10 @@ namespace logger
 	public:
 		ResponseLogger() : FileLogger(constants::responseLogPath) {}
 
-		void log(const std::thread::id threadId, const std::string functionName);
+		void log(
+			const std::thread::id threadId,
+			const std::string functionName,
+			const std::string clientAddr,
+			const std::string response);
 	};
 }
