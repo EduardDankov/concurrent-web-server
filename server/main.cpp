@@ -1,20 +1,18 @@
-#include <iostream>
-#include <fstream>
-#include <memory>
-
 #include "constants.h"
 
 #include "logger/FileLogger.h"
 #include "networking/Socket.h"
+#include "monitoring/SystemMonitor.h"
 
 int main()
 {
+	// SystemMonitor instance has to be created before first connection for correct CPU usage measurement
+	monitoring::SystemMonitor::getInstance();
 	logger::FileLogger::createLogDir(constants::logDirPath);
 
-	networking::Socket socket{};
 	while (true)
 	{
-		socket.acceptConnection();
+		networking::Socket::getInstance()->acceptConnection();
 	}
 	return 0;
 }

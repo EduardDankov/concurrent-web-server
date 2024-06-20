@@ -60,6 +60,15 @@
     <ClCompile Include="monitoring\WinSystemMonitor.cpp">
       <Filter>Source Files\monitoring</Filter>
     </ClCompile>
+    <ClCompile Include="networking\Socket.cpp">
+      <Filter>Source Files\networking</Filter>
+    </ClCompile>
+    <ClCompile Include="networking\ThreadPool.cpp">
+      <Filter>Source Files\networking</Filter>
+    </ClCompile>
+    <ClCompile Include="monitoring\SystemMonitor.cpp">
+      <Filter>Source Files\monitoring</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="logger\FileLogger.h">
@@ -86,14 +95,17 @@
     <ClInclude Include="constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="global.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="monitoring\SystemMonitor.h">
       <Filter>Header Files\monitoring</Filter>
     </ClInclude>
     <ClInclude Include="monitoring\WinSystemMonitor.h">
       <Filter>Header Files\monitoring</Filter>
+    </ClInclude>
+    <ClInclude Include="networking\Connection.h">
+      <Filter>Header Files\networking</Filter>
+    </ClInclude>
+    <ClInclude Include="networking\WinConnection.h">
+      <Filter>Header Files\networking</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

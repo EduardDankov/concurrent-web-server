@@ -6,6 +6,8 @@
 #include "LinuxSocket.h"
 #endif
 
+#include <memory>
+
 namespace networking
 {
 	class Socket
@@ -14,5 +16,8 @@ namespace networking
 #elif defined linux
 		: public LinuxSocket
 #endif
-	{};
+	{
+	public:
+		static std::shared_ptr<Socket> getInstance();
+	};
 }

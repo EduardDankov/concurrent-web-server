@@ -7,6 +7,8 @@
 #include <WinSock2.h>
 #include <WS2tcpip.h>
 
+#include "Connection.h"
+
 namespace networking
 {
 	class WinSocket
@@ -27,15 +29,15 @@ namespace networking
 		void bindSocket();
 		void listenSocket();
 
-		std::string getClientIP(const sockaddr_in clientAddr);
-		std::string generateResponse(const std::string request);
-		void handleConnection(SOCKET clientSocket);
+		std::string getClientIP(std::shared_ptr<Connection> connection);
+		std::string generateResponse(const std::string requestMessage);
 
 	public:
 		WinSocket();
 		virtual ~WinSocket();
 
 		void acceptConnection();
+		void handleConnection(std::shared_ptr<Connection> connection);
 	};
 }
 

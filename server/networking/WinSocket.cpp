@@ -6,7 +6,11 @@
 #include <string>
 #include <iostream>
 
-#include "../global.h"
+#include "Connection.h"
+#include "ThreadPool.h"
+#include "../logger/RequestLogger.h"
+#include "../logger/ResponseLogger.h"
+#include "../monitoring/SystemMonitor.h"
 
 void networking::WinSocket::initializeWSA()
 {
@@ -57,36 +61,36 @@ void networking::WinSocket::listenSocket()
 	std::cout << "Listening to " << constants::serverAddr << ":" << constants::serverPort << "..." << std::endl;
 }
 
-std::string networking::WinSocket::getClientIP(const sockaddr_in clientAddr)
+std::string networking::WinSocket::getClientIP(std::shared_ptr<Connection> connection)
 {
 	std::vector<char> addrBuffer(INET_ADDRSTRLEN);
-	inet_ntop(AF_INET, &(clientAddr.sin_addr), &addrBuffer[0], INET_ADDRSTRLEN);
+	inet_ntop(AF_INET, &(connection->clientAddr.sin_addr), &addrBuffer[0], INET_ADDRSTRLEN);
 	std::string ip;
 	addrBuffer.resize(std::distance(addrBuffer.begin(), std::find(addrBuffer.begin(), addrBuffer.end(), 0)));
 	ip.append(addrBuffer.cbegin(), addrBuffer.cend());
 	return ip;
 }
 
-std::string networking::WinSocket::generateResponse(const std::string request)
+std::string networking::WinSocket::generateResponse(const std::string requestMessage)
 {
-	if (request == "getserverversion")
+	if (requestMessage == "getserverversion")
 	{
 		return constants::serverVersion;
 	}
-	if (request == "getserverstatus")
+	if (requestMessage == "getserverstatus")
 	{
-		std::string cpuUsage = global::systemMonitor.getCpuLoad();
-		std::string memoryUsage = global::systemMonitor.getMemoryUsage();
+		std::string cpuUsage = monitoring::SystemMonitor::getInstance()->getCpuLoad();
+		std::string memoryUsage = monitoring::SystemMonitor::getInstance()->getMemoryUsage();
 		return std::format("Server status:\nCPU usage: {}\nMemory usage: {}", cpuUsage, memoryUsage);
 	}
 
 	return "Bad Request";
 }
 
-void networking::WinSocket::handleConnection(SOCKET clientSocket)
+void networking::WinSocket::handleConnection(std::shared_ptr<Connection> connection)
 {
 	std::vector<char> buffer(constants::bufferSize);
-	size_t bytesRead = recv(clientSocket, &buffer[0], static_cast<int>(buffer.size()), 0);
+	size_t bytesRead = recv(connection->clientSocket, &buffer[0], static_cast<int>(buffer.size()), 0);
 
 	if (bytesRead < 0)
 	{
@@ -98,15 +102,15 @@ void networking::WinSocket::handleConnection(SOCKET clientSocket)
 	buffer.resize(bytesRead);
 	request.append(buffer.cbegin(), buffer.cend());
 
-	global::requestLogger.log(
+	logger::RequestLogger::getInstance()->log(
 		std::this_thread::get_id(), 
 		"networking::WinSocket::handleConnection", 
-		getClientIP(m_clientAddr),
+		getClientIP(connection),
 		request
 	);
 
 	std::string response = generateResponse(request);
-	size_t bytesSent = send(clientSocket, response.c_str(), static_cast<int>(response.size()), 0);
+	size_t bytesSent = send(connection->clientSocket, response.c_str(), static_cast<int>(response.size()), 0);
 
 	if (bytesSent < 0)
 	{
@@ -114,10 +118,10 @@ void networking::WinSocket::handleConnection(SOCKET clientSocket)
 		return;
 	}
 
-	global::responseLogger.log(
+	logger::ResponseLogger::getInstance()->log(
 		std::this_thread::get_id(),
 		"networking::WinSocket::handleConnection",
-		getClientIP(m_clientAddr),
+		getClientIP(connection),
 		response
 	);
 }
@@ -137,14 +141,19 @@ networking::WinSocket::~WinSocket()
 
 void networking::WinSocket::acceptConnection()
 {
-	m_clientAddrSize = sizeof(sockaddr_in);
-	m_clientSocket = accept(m_serverSocket, reinterpret_cast<SOCKADDR*>(&m_clientAddr), &m_clientAddrSize);
+	std::shared_ptr<Connection> connection = std::make_shared<Connection>();
 
-	if (m_clientSocket == INVALID_SOCKET)
+	connection->clientAddrSize = sizeof(sockaddr_in);
+	connection->clientSocket = accept(
+		m_serverSocket, 
+		reinterpret_cast<SOCKADDR*>(&connection->clientAddr), 
+		&connection->clientAddrSize);
+
+	if (connection->clientSocket == INVALID_SOCKET)
 	{
 		std::cerr << "Failed to accept connection: " << WSAGetLastError() << std::endl;
 		return;
 	}
 
-	handleConnection(m_clientSocket);
+	networking::ThreadPool::getInstance()->queueConnection(connection);
 }
