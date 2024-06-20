@@ -2,6 +2,12 @@
 
 #include "../utils/DateTime.h"
 
+std::shared_ptr<logger::ResponseLogger> logger::ResponseLogger::getInstance()
+{
+	static std::shared_ptr<ResponseLogger> instance(new ResponseLogger);
+	return instance;
+}
+
 void logger::ResponseLogger::log(
 	const std::thread::id threadId,
 	const std::string functionName,

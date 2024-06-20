@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <thread>
+#include <memory>
 
 #include "FileLogger.h"
 #include "../constants.h"
@@ -9,8 +10,11 @@ namespace logger
 {
 	class ResponseLogger : public FileLogger
 	{
-	public:
+	private:
 		ResponseLogger() : FileLogger(constants::responseLogPath) {}
+	
+	public:
+		static std::shared_ptr<ResponseLogger> getInstance();
 
 		void log(
 			const std::thread::id threadId,

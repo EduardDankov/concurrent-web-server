@@ -6,6 +6,8 @@
 #include "LinuxSystemMonitor.h"
 #endif
 
+#include <memory>
+
 namespace monitoring
 {
 	class SystemMonitor
@@ -14,5 +16,8 @@ namespace monitoring
 #elif defined linux
 		: public LinuxSystemMonitor
 #endif
-	{};
+	{
+	public:
+		static std::shared_ptr<SystemMonitor> getInstance();
+	};
 }
