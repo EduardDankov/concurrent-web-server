@@ -29,6 +29,8 @@ namespace networking
 	public:
 		WinSocket();
 
+		virtual ~WinSocket();
+
 		void sendRequest(const std::string message);
 	};
 }

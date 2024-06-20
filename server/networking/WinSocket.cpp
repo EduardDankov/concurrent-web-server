@@ -127,6 +127,11 @@ networking::WinSocket::WinSocket()
 	listenSocket();
 }
 
+networking::WinSocket::~WinSocket()
+{
+	WSACleanup();
+}
+
 void networking::WinSocket::acceptConnection()
 {
 	m_clientAddrSize = sizeof(sockaddr_in);
@@ -135,7 +140,6 @@ void networking::WinSocket::acceptConnection()
 	if (m_clientSocket == INVALID_SOCKET)
 	{
 		std::cerr << "Failed to accept connection: " << WSAGetLastError() << std::endl;
-		WSACleanup();
 		return;
 	}
 

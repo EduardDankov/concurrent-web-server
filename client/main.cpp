@@ -4,10 +4,11 @@
 
 int main()
 {
-	networking::Socket socket{};
 	while (true)
 	{
-		socket.sendRequest(cli::RequestSelector::select());
+		networking::Socket socket{};
+		std::string request = cli::RequestSelector::select();
+		socket.sendRequest(request);
 		std::cin.get();
 	}
 	return 0;

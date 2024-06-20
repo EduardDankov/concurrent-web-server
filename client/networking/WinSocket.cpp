@@ -61,7 +61,7 @@ void networking::WinSocket::handleResponse(SOCKET clientSocket)
 	buffer.resize(bytesRead);
 	response.append(buffer.cbegin(), buffer.cend());
 
-	std::cout << "Server response: " << response << std::endl;
+	std::cout << "Server response: " << response << '\n' << std::endl;
 }
 
 networking::WinSocket::WinSocket()
@@ -71,6 +71,11 @@ networking::WinSocket::WinSocket()
 	connectSocket();
 }
 
+networking::WinSocket::~WinSocket()
+{
+	WSACleanup();
+}
+
 void networking::WinSocket::sendRequest(const std::string message)
 {
 	size_t bytesSent = send(m_clientSocket, const_cast<char*>(message.c_str()), static_cast<int>(message.size()), 0);
@@ -78,7 +83,6 @@ void networking::WinSocket::sendRequest(const std::string message)
 	if (bytesSent == SOCKET_ERROR)
 	{
 		std::cerr << "Failed to send a request: " << WSAGetLastError() << std::endl;
-		WSACleanup();
 		return;
 	}
 

@@ -33,6 +33,7 @@ namespace networking
 
 	public:
 		WinSocket();
+		virtual ~WinSocket();
 
 		void acceptConnection();
 	};
