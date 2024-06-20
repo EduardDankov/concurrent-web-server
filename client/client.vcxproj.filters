@@ -19,6 +19,12 @@
     <Filter Include="Header Files\networking">
       <UniqueIdentifier>{b82dca21-102d-4ce2-93b3-45b8ea269e5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\cli">
+      <UniqueIdentifier>{24081dd8-6413-4178-b99c-3d40d1d6ad3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cli">
+      <UniqueIdentifier>{0853353b-116f-4506-bab4-c6207ed5d6ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -26,6 +32,9 @@
     </ClCompile>
     <ClCompile Include="networking\WinSocket.cpp">
       <Filter>Source Files\networking</Filter>
+    </ClCompile>
+    <ClCompile Include="cli\RequestSelector.cpp">
+      <Filter>Source Files\cli</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -37,6 +46,9 @@
     </ClInclude>
     <ClInclude Include="..\server\constants.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cli\RequestSelector.h">
+      <Filter>Header Files\cli</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
