@@ -1,6 +1,8 @@
 #include "WinSocket.h"
 
 #include <memory>
+#include <vector>
+#include <string>
 #include <iostream>
 
 #include "../global.h"
@@ -54,10 +56,34 @@ void networking::WinSocket::listenSocket()
 	std::cout << "Listening to " << constants::serverAddr << ":" << constants::serverPort << "..." << std::endl;
 }
 
+std::string networking::WinSocket::getClientIP(const sockaddr_in clientAddr)
+{
+	std::vector<char> addrBuffer(INET_ADDRSTRLEN);
+	inet_ntop(AF_INET, &(clientAddr.sin_addr), &addrBuffer[0], INET_ADDRSTRLEN);
+	std::string ip;
+	addrBuffer.resize(std::distance(addrBuffer.begin(), std::find(addrBuffer.begin(), addrBuffer.end(), 0)));
+	ip.append(addrBuffer.cbegin(), addrBuffer.cend());
+	return ip;
+}
+
+std::string networking::WinSocket::generateResponse(const std::string request)
+{
+	if (request == "getserverversion")
+	{
+		return constants::serverVersion;
+	}
+	if (request == "getserverstatus")
+	{
+		return "CPU, RAM";
+	}
+
+	return "Bad Request";
+}
+
 void networking::WinSocket::handleConnection(SOCKET clientSocket)
 {
-	char buffer[constants::bufferSize];
-	size_t bytesRead = recv(clientSocket, buffer, constants::bufferSize, 0);
+	std::vector<char> buffer(constants::bufferSize);
+	size_t bytesRead = recv(clientSocket, &buffer[0], static_cast<int>(buffer.size()), 0);
 
 	if (bytesRead < 0)
 	{
@@ -65,14 +91,31 @@ void networking::WinSocket::handleConnection(SOCKET clientSocket)
 		return;
 	}
 
-	char addrBuffer[INET_ADDRSTRLEN];
-	inet_ntop(AF_INET, &(m_clientAddr.sin_addr), addrBuffer, INET_ADDRSTRLEN);
+	std::string request;
+	buffer.resize(bytesRead);
+	request.append(buffer.cbegin(), buffer.cend());
 
 	global::requestLogger.log(
 		std::this_thread::get_id(), 
 		"networking::WinSocket::handleConnection", 
-		addrBuffer,
-		buffer
+		getClientIP(m_clientAddr),
+		request
+	);
+
+	std::string response = generateResponse(request);
+	size_t bytesSent = send(clientSocket, response.c_str(), response.size(), 0);
+
+	if (bytesSent < 0)
+	{
+		std::cerr << "Failed to send response: " << WSAGetLastError() << std::endl;
+		return;
+	}
+
+	global::responseLogger.log(
+		std::this_thread::get_id(),
+		"networking::WinSocket::handleConnection",
+		getClientIP(m_clientAddr),
+		response
 	);
 }
 
