@@ -5,13 +5,13 @@ namespace logger
 {
 	class FileLogger
 	{
-	private:
+	protected:
 		std::unique_ptr<std::ofstream> m_os;
 
 	public:
 		FileLogger(const std::filesystem::path& path);
 
-		~FileLogger();
+		virtual ~FileLogger();
 
 		static void createLogDir(const std::filesystem::path& path);
 
