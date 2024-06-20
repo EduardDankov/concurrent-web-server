@@ -3,6 +3,8 @@
 
 # Visual Studio cache directory
 .vs
+*.user
 
 # Output directory
 out/
+x64/
