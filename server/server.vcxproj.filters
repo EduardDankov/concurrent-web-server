@@ -31,6 +31,12 @@
     <Filter Include="Header Files\utils">
       <UniqueIdentifier>{b3900db4-958d-4430-b588-6b13723c0071}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\monitoring">
+      <UniqueIdentifier>{7237b9e5-ab5d-4358-ad5a-fe0cd12a27b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\monitoring">
+      <UniqueIdentifier>{7d8f96ce-4af5-4739-8567-4421513b6337}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="utils\DateTime.cpp">
@@ -50,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="logger\ResponseLogger.cpp">
       <Filter>Source Files\logger</Filter>
+    </ClCompile>
+    <ClCompile Include="monitoring\WinSystemMonitor.cpp">
+      <Filter>Source Files\monitoring</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -79,6 +88,12 @@
     </ClInclude>
     <ClInclude Include="global.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="monitoring\SystemMonitor.h">
+      <Filter>Header Files\monitoring</Filter>
+    </ClInclude>
+    <ClInclude Include="monitoring\WinSystemMonitor.h">
+      <Filter>Header Files\monitoring</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

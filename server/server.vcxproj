@@ -132,6 +132,7 @@
     <ClCompile Include="logger\RequestLogger.cpp" />
     <ClCompile Include="logger\ResponseLogger.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="monitoring\WinSystemMonitor.cpp" />
     <ClCompile Include="networking\WinSocket.cpp" />
     <ClCompile Include="utils\DateTime.cpp" />
   </ItemGroup>
@@ -141,6 +142,8 @@
     <ClInclude Include="logger\FileLogger.h" />
     <ClInclude Include="logger\RequestLogger.h" />
     <ClInclude Include="logger\ResponseLogger.h" />
+    <ClInclude Include="monitoring\SystemMonitor.h" />
+    <ClInclude Include="monitoring\WinSystemMonitor.h" />
     <ClInclude Include="networking\Socket.h" />
     <ClInclude Include="networking\ThreadPool.h" />
     <ClInclude Include="networking\WinSocket.h" />

@@ -1,6 +1,7 @@
 #include "WinSocket.h"
 
 #include <memory>
+#include <format>
 #include <vector>
 #include <string>
 #include <iostream>
@@ -74,7 +75,9 @@ std::string networking::WinSocket::generateResponse(const std::string request)
 	}
 	if (request == "getserverstatus")
 	{
-		return "CPU, RAM";
+		std::string cpuUsage = global::systemMonitor.getCpuLoad();
+		std::string memoryUsage = global::systemMonitor.getMemoryUsage();
+		return std::format("Server status:\nCPU usage: {}\nMemory usage: {}", cpuUsage, memoryUsage);
 	}
 
 	return "Bad Request";
@@ -103,7 +106,7 @@ void networking::WinSocket::handleConnection(SOCKET clientSocket)
 	);
 
 	std::string response = generateResponse(request);
-	size_t bytesSent = send(clientSocket, response.c_str(), response.size(), 0);
+	size_t bytesSent = send(clientSocket, response.c_str(), static_cast<int>(response.size()), 0);
 
 	if (bytesSent < 0)
 	{
