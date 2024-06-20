@@ -16,6 +16,6 @@ namespace logger
 			const std::thread::id threadId, 
 			const std::string functionName, 
 			const std::string clientAddr, 
-			const char* request);
+			const std::string request);
 	};
 }
