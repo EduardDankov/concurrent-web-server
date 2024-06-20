@@ -8,3 +8,6 @@
 # Output directory
 out/
 x64/
+
+# Application logs
+logs/
