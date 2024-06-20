@@ -130,6 +130,7 @@
   <ItemGroup>
     <ClCompile Include="logger\FileLogger.cpp" />
     <ClCompile Include="logger\RequestLogger.cpp" />
+    <ClCompile Include="logger\ResponseLogger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="networking\WinSocket.cpp" />
     <ClCompile Include="utils\DateTime.cpp" />
