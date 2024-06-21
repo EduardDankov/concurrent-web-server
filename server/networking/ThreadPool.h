@@ -16,30 +16,11 @@ namespace networking
 		std::array<std::thread, constants::threadPoolSize> m_threads{};
 		std::queue<std::shared_ptr<Connection>> requestQueue{};
 
-		ThreadPool()
-		{
-			for (auto& thread : m_threads)
-			{
-				thread = std::thread([this]() { checkForConnections(); });
-			}
-		}
+		ThreadPool();
 
 	public:
 		static std::shared_ptr<ThreadPool> getInstance();
-
-		void checkForConnections()
-		{
-			if (!requestQueue.empty())
-			{
-				std::shared_ptr<Connection> connection = requestQueue.front();
-				requestQueue.pop();
-				networking::Socket::getInstance()->handleConnection(connection);
-			}
-		}
-
-		void queueConnection(std::shared_ptr<Connection> connection)
-		{
-			requestQueue.push(connection);
-		}
+		void checkForConnections();
+		void queueConnection(std::shared_ptr<Connection> connection);
 	};
 }
