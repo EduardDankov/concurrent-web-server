@@ -14,7 +14,7 @@ namespace networking
 	{
 	private:
 		std::array<std::thread, constants::threadPoolSize> m_threads{};
-		std::queue<std::shared_ptr<Connection>> requestQueue{};
+		std::queue<std::shared_ptr<Connection>> m_requestQueue{};
 
 		ThreadPool();
 

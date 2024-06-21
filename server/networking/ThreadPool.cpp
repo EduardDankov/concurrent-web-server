@@ -16,15 +16,15 @@ std::shared_ptr<networking::ThreadPool> networking::ThreadPool::getInstance()
 
 void networking::ThreadPool::checkForConnections()
 {
-	if (!requestQueue.empty())
+	if (!m_requestQueue.empty())
 	{
-		std::shared_ptr<Connection> connection = requestQueue.front();
-		requestQueue.pop();
+		std::shared_ptr<Connection> connection = m_requestQueue.front();
+		m_requestQueue.pop();
 		networking::Socket::getInstance()->handleConnection(connection);
 	}
 }
 
 void networking::ThreadPool::queueConnection(std::shared_ptr<Connection> connection)
 {
-	requestQueue.push(connection);
+	m_requestQueue.push(connection);
 }
