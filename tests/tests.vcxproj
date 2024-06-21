@@ -101,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DateTime.test.cpp" />
+    <ClCompile Include="FileLogger.test.cpp" />
     <ClCompile Include="SystemMonitor.test.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="pch.cpp">
