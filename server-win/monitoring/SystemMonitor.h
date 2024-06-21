@@ -2,7 +2,7 @@
 
 #if defined _WIN32
 #include "WinSystemMonitor.h"
-#elif defined linux
+#elif defined __linux__
 #include "LinuxSystemMonitor.h"
 #endif
 
@@ -13,7 +13,7 @@ namespace monitoring
 	class SystemMonitor
 #if defined _WIN32
 		: public WinSystemMonitor
-#elif defined linux
+#elif defined __linux__
 		: public LinuxSystemMonitor
 #endif
 	{

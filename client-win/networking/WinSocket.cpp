@@ -5,7 +5,7 @@
 #include <string>
 #include <iostream>
 
-#include "../../server/constants.h"
+#include "../../server-win/constants.h"
 
 void networking::WinSocket::initializeWSA()
 {
