@@ -152,6 +152,7 @@
     <ClInclude Include="networking\WinConnection.h" />
     <ClInclude Include="networking\WinSocket.h" />
     <ClInclude Include="utils\DateTime.h" />
+    <ClInclude Include="utils\Json.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

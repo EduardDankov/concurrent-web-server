@@ -1,10 +1,12 @@
 #include <string>
 
+#include "../utils/Json.h"
+
 namespace cli
 {
 	class RequestSelector
 	{
 	public:
-		static std::string select();
+		static nlohmann::json select();
 	};
 }

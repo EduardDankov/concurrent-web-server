@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 
-std::string cli::RequestSelector::select()
+nlohmann::json cli::RequestSelector::select()
 {
 	std::vector<std::string> validRequests{ "getserverversion", "getserverstatus" };
 
@@ -12,7 +12,7 @@ std::string cli::RequestSelector::select()
 		std::cout << "Please enter request ID:" << '\n';
 		for (int i = 0; i < validRequests.size(); i++)
 		{
-			std::cout << i << " - " << validRequests[i] << '\n';
+			std::cout << i << " - " << validRequests.at(i) << '\n';
 		}
 		std::cout << std::endl;
 
@@ -23,6 +23,8 @@ std::string cli::RequestSelector::select()
 			continue;
 		}
 		
-		return validRequests[requestId];
+		return {
+			{"message", validRequests.at(requestId)}
+		};
 	}
 }

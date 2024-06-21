@@ -71,20 +71,30 @@ std::string networking::WinSocket::getClientIP(std::shared_ptr<Connection> conne
 	return ip;
 }
 
-std::string networking::WinSocket::generateResponse(const std::string requestMessage)
+nlohmann::json networking::WinSocket::generateResponse(const nlohmann::json request)
 {
-	if (requestMessage == "getserverversion")
+	if (request.contains("message"))
 	{
-		return constants::serverVersion;
-	}
-	if (requestMessage == "getserverstatus")
-	{
-		std::string cpuUsage = monitoring::SystemMonitor::getInstance()->getCpuLoad();
-		std::string memoryUsage = monitoring::SystemMonitor::getInstance()->getMemoryUsage();
-		return std::format("Server status:\nCPU usage: {}\nMemory usage: {}", cpuUsage, memoryUsage);
+		if (request.at("message") == "getserverversion")
+		{
+			return {
+				{"version", constants::serverVersion}
+			};
+		}
+		if (request.at("message") == "getserverstatus")
+		{
+			std::string cpuUsage = monitoring::SystemMonitor::getInstance()->getCpuLoad();
+			std::string memoryUsage = monitoring::SystemMonitor::getInstance()->getMemoryUsage();
+			return {
+				{"cpuUsage", cpuUsage},
+				{"memoryUsage", memoryUsage}
+			};
+		}
 	}
 
-	return "Bad Request";
+	return {
+		{"error", "Bad Request"}
+	};
 }
 
 void networking::WinSocket::handleConnection(std::shared_ptr<Connection> connection)
@@ -98,9 +108,8 @@ void networking::WinSocket::handleConnection(std::shared_ptr<Connection> connect
 		return;
 	}
 
-	std::string request;
 	buffer.resize(bytesRead);
-	request.append(buffer.cbegin(), buffer.cend());
+	nlohmann::json request = nlohmann::json::parse(buffer.cbegin(), buffer.cend());
 
 	logger::RequestLogger::getInstance()->log(
 		std::this_thread::get_id(), 
@@ -109,8 +118,8 @@ void networking::WinSocket::handleConnection(std::shared_ptr<Connection> connect
 		request
 	);
 
-	std::string response = generateResponse(request);
-	size_t bytesSent = send(connection->clientSocket, response.c_str(), static_cast<int>(response.size()), 0);
+	std::string responseString = generateResponse(request).dump();
+	size_t bytesSent = send(connection->clientSocket, responseString.c_str(), static_cast<int>(responseString.size()), 0);
 
 	if (bytesSent < 0)
 	{
@@ -122,7 +131,7 @@ void networking::WinSocket::handleConnection(std::shared_ptr<Connection> connect
 		std::this_thread::get_id(),
 		"networking::WinSocket::handleConnection",
 		getClientIP(connection),
-		response
+		responseString
 	);
 }
 

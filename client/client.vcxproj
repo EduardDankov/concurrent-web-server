@@ -137,6 +137,7 @@
     <ClInclude Include="cli\RequestSelector.h" />
     <ClInclude Include="networking\Socket.h" />
     <ClInclude Include="networking\WinSocket.h" />
+    <ClInclude Include="utils\Json.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -57,9 +57,8 @@ void networking::WinSocket::handleResponse(SOCKET clientSocket)
 		return;
 	}
 
-	std::string response;
 	buffer.resize(bytesRead);
-	response.append(buffer.cbegin(), buffer.cend());
+	nlohmann::json response = nlohmann::json::parse(buffer.cbegin(), buffer.cend());
 
 	std::cout << "Server response: " << response << '\n' << std::endl;
 }
@@ -76,9 +75,10 @@ networking::WinSocket::~WinSocket()
 	WSACleanup();
 }
 
-void networking::WinSocket::sendRequest(const std::string message)
+void networking::WinSocket::sendRequest(const nlohmann::json request)
 {
-	size_t bytesSent = send(m_clientSocket, const_cast<char*>(message.c_str()), static_cast<int>(message.size()), 0);
+	std::string requestString = request.dump();
+	size_t bytesSent = send(m_clientSocket, requestString.c_str(), static_cast<int>(requestString.size()), 0);
 
 	if (bytesSent == SOCKET_ERROR)
 	{

@@ -12,11 +12,11 @@ void logger::RequestLogger::log(
 	const std::thread::id threadId, 
 	const std::string functionName, 
 	const std::string clientAddr,
-	const std::string request)
+	const nlohmann::json request)
 {
 	*m_os << "Thread #" << threadId << " - "
 		  << utils::DateTime::getUTC() << " - " 
 		  << "[" << functionName << "] - "
 		  << "request from " << clientAddr << " - " 
-		  << request << '\n';
+		  << request.dump() << '\n';
 }

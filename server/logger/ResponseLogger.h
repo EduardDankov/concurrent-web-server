@@ -5,6 +5,7 @@
 
 #include "FileLogger.h"
 #include "../constants.h"
+#include "../utils/Json.h"
 
 namespace logger
 {
@@ -20,6 +21,6 @@ namespace logger
 			const std::thread::id threadId,
 			const std::string functionName,
 			const std::string clientAddr,
-			const std::string response);
+			const nlohmann::json response);
 	};
 }

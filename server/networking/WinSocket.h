@@ -8,6 +8,7 @@
 #include <WS2tcpip.h>
 
 #include "Connection.h"
+#include "../utils/Json.h"
 
 namespace networking
 {
@@ -30,7 +31,7 @@ namespace networking
 		void listenSocket();
 
 		std::string getClientIP(std::shared_ptr<Connection> connection);
-		std::string generateResponse(const std::string requestMessage);
+		nlohmann::json generateResponse(const nlohmann::json request);
 
 	public:
 		WinSocket();

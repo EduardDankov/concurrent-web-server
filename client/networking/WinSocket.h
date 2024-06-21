@@ -7,6 +7,8 @@
 #include <WinSock2.h>
 #include <WS2tcpip.h>
 
+#include "../utils/Json.h"
+
 namespace networking
 {
 	class WinSocket
@@ -31,7 +33,7 @@ namespace networking
 
 		virtual ~WinSocket();
 
-		void sendRequest(const std::string message);
+		void sendRequest(const nlohmann::json request);
 	};
 }
 
