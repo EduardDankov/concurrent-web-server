@@ -2,6 +2,8 @@
 #include <array>
 #include <queue>
 #include <thread>
+#include <mutex>
+#include <condition_variable>
 #include <memory>
 
 #include "Socket.h"
@@ -15,6 +17,9 @@ namespace networking
 	private:
 		std::array<std::thread, constants::threadPoolSize> m_threads{};
 		std::queue<std::shared_ptr<Connection>> m_requestQueue{};
+
+		std::mutex m_queueMutex;
+		std::condition_variable m_queueCondition;
 
 		ThreadPool();
 
