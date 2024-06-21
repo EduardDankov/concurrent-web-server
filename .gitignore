@@ -11,3 +11,6 @@ x64/
 
 # Application logs
 logs/
+
+# Temporary folders
+enc_temp_folder/
