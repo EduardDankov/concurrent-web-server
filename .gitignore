@@ -15,5 +15,8 @@ logs/
 # Package directories
 packages/
 
+# Temporary test files
+test-files/
+
 # Temporary directories
 enc_temp_folder/
