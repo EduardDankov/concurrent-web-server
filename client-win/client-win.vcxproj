@@ -133,7 +133,7 @@
     <ClCompile Include="networking\WinSocket.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\server\constants.h" />
+    <ClInclude Include="..\server-win\constants.h" />
     <ClInclude Include="cli\RequestSelector.h" />
     <ClInclude Include="networking\Socket.h" />
     <ClInclude Include="networking\WinSocket.h" />
