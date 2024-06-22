@@ -34,45 +34,15 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\server-win\constants.h" />
-    <ClInclude Include="..\server-win\logger\FileLogger.h" />
-    <ClInclude Include="..\server-win\logger\RequestLogger.h" />
-    <ClInclude Include="..\server-win\logger\ResponseLogger.h" />
-    <ClInclude Include="..\server-win\monitoring\LinuxSystemMonitor.h" />
-    <ClInclude Include="..\server-win\monitoring\SystemMonitor.h" />
-    <ClInclude Include="..\server-win\networking\Connection.h" />
-    <ClInclude Include="..\server-win\networking\LinuxConnection.h" />
-    <ClInclude Include="..\server-win\networking\LinuxSocket.h" />
-    <ClInclude Include="..\server-win\networking\Socket.h" />
-    <ClInclude Include="..\server-win\networking\ThreadPool.h" />
-    <ClInclude Include="..\server-win\utils\DateTime.h" />
-    <ClInclude Include="..\server-win\utils\Json.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\server-win\logger\FileLogger.cpp" />
-    <ClCompile Include="..\server-win\logger\RequestLogger.cpp">
-      <CppLanguageStandard Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">c++20</CppLanguageStandard>
-    </ClCompile>
-    <ClCompile Include="..\server-win\logger\ResponseLogger.cpp" />
-    <ClCompile Include="..\server-win\main.cpp" />
-    <ClCompile Include="..\server-win\monitoring\LinuxSystemMonitor.cpp" />
-    <ClCompile Include="..\server-win\monitoring\SystemMonitor.cpp" />
-    <ClCompile Include="..\server-win\networking\LinuxSocket.cpp" />
-    <ClCompile Include="..\server-win\networking\Socket.cpp" />
-    <ClCompile Include="..\server-win\networking\ThreadPool.cpp" />
-    <ClCompile Include="..\server-win\utils\DateTime.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{49ccb8d2-db6f-472e-8fd6-c449bb0c67ab}</ProjectGuid>
+    <ProjectGuid>{9d16e9ee-4ad8-47e6-979c-7c57fba22783}</ProjectGuid>
     <Keyword>Linux</Keyword>
-    <RootNamespace>server</RootNamespace>
+    <RootNamespace>server_linux</RootNamespace>
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
     <ApplicationType>Linux</ApplicationType>
     <ApplicationTypeRevision>1.0</ApplicationTypeRevision>
     <TargetLinuxPlatform>Generic</TargetLinuxPlatform>
     <LinuxProjectType>{2238F9CD-F817-4ECC-BD14-2524D2669B35}</LinuxProjectType>
-    <ProjectName>server-linux</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
@@ -105,6 +75,33 @@
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
+  <ItemGroup>
+    <ClInclude Include="..\server-win\constants.h" />
+    <ClInclude Include="..\server-win\logger\FileLogger.h" />
+    <ClInclude Include="..\server-win\logger\RequestLogger.h" />
+    <ClInclude Include="..\server-win\logger\ResponseLogger.h" />
+    <ClInclude Include="..\server-win\monitoring\LinuxSystemMonitor.h" />
+    <ClInclude Include="..\server-win\monitoring\SystemMonitor.h" />
+    <ClInclude Include="..\server-win\networking\Connection.h" />
+    <ClInclude Include="..\server-win\networking\LinuxConnection.h" />
+    <ClInclude Include="..\server-win\networking\LinuxSocket.h" />
+    <ClInclude Include="..\server-win\networking\Socket.h" />
+    <ClInclude Include="..\server-win\networking\ThreadPool.h" />
+    <ClInclude Include="..\server-win\utils\DateTime.h" />
+    <ClInclude Include="..\server-win\utils\Json.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\server-win\logger\FileLogger.cpp" />
+    <ClCompile Include="..\server-win\logger\RequestLogger.cpp" />
+    <ClCompile Include="..\server-win\logger\ResponseLogger.cpp" />
+    <ClCompile Include="..\server-win\main.cpp" />
+    <ClCompile Include="..\server-win\monitoring\LinuxSystemMonitor.cpp" />
+    <ClCompile Include="..\server-win\monitoring\SystemMonitor.cpp" />
+    <ClCompile Include="..\server-win\networking\LinuxSocket.cpp" />
+    <ClCompile Include="..\server-win\networking\Socket.cpp" />
+    <ClCompile Include="..\server-win\networking\ThreadPool.cpp" />
+    <ClCompile Include="..\server-win\utils\DateTime.cpp" />
+  </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <CppLanguageStandard>c++20</CppLanguageStandard>

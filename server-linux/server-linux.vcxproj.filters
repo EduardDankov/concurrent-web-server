@@ -2,92 +2,107 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{c20e9760-bf81-4a38-b391-11bfd61a4ce4}</UniqueIdentifier>
+      <UniqueIdentifier>{07bc7eec-f294-42aa-b76d-a87ffaceb14a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{e840f6f8-74c3-4dc1-b062-3f1890f9bce8}</UniqueIdentifier>
+      <UniqueIdentifier>{52190694-212a-4f9c-939d-9fe4fc9e9e23}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\monitoring">
-      <UniqueIdentifier>{70ae22bb-6333-4249-a4ef-24cdac56db5e}</UniqueIdentifier>
+      <UniqueIdentifier>{6c844ebb-5dd6-4134-8f0a-266da6e46b9b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\logger">
-      <UniqueIdentifier>{a97eab9c-1d02-4753-a0af-d3d8a79956fe}</UniqueIdentifier>
+      <UniqueIdentifier>{1d41e2f5-1842-47e4-8337-d08d0b1ba40e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\networking">
-      <UniqueIdentifier>{82f144bd-6255-4e42-b283-d4c9ec1220a3}</UniqueIdentifier>
+      <UniqueIdentifier>{147ee6c1-3f0f-465a-954c-0a875b8a21e0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\utils">
-      <UniqueIdentifier>{251cc62c-2929-46a4-9f7e-454cf4d2fccf}</UniqueIdentifier>
+      <UniqueIdentifier>{d8c6a2a7-f17c-4d66-8e1f-6ba8e1e91807}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\monitoring">
-      <UniqueIdentifier>{861db534-62f1-44cd-9192-cf42fae5eb90}</UniqueIdentifier>
+      <UniqueIdentifier>{f11b8a73-d772-4fea-bbf4-9bea0829b7bc}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\logger">
-      <UniqueIdentifier>{6e8ef9fe-89e4-4a1e-82a6-d5ca97faa44b}</UniqueIdentifier>
+      <UniqueIdentifier>{dd07f9c1-36bf-489a-94a4-a06832a4c63c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\networking">
-      <UniqueIdentifier>{ee85c08a-a095-421d-93a6-82165f2f34f2}</UniqueIdentifier>
+      <UniqueIdentifier>{3b8bbfbb-e589-452a-9fb2-66b98e0678c3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\utils">
-      <UniqueIdentifier>{5b61e983-1ef5-4081-91d2-7c81b1ef6ccb}</UniqueIdentifier>
+      <UniqueIdentifier>{61ad893e-a8b2-49fb-b391-8e8bd8bb889a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\server\constants.h">
+    <ClInclude Include="..\server-win\constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\server\utils\DateTime.h">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\server\utils\Json.h">
-      <Filter>Header Files\utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\server\networking\Connection.h">
-      <Filter>Header Files\networking</Filter>
-    </ClInclude>
-    <ClInclude Include="..\server\networking\Socket.h">
-      <Filter>Header Files\networking</Filter>
-    </ClInclude>
-    <ClInclude Include="..\server\networking\ThreadPool.h">
-      <Filter>Header Files\networking</Filter>
-    </ClInclude>
-    <ClInclude Include="..\server\logger\FileLogger.h">
-      <Filter>Header Files\logger</Filter>
-    </ClInclude>
-    <ClInclude Include="..\server\logger\RequestLogger.h">
-      <Filter>Header Files\logger</Filter>
-    </ClInclude>
-    <ClInclude Include="..\server\logger\ResponseLogger.h">
-      <Filter>Header Files\logger</Filter>
-    </ClInclude>
-    <ClInclude Include="..\server\monitoring\SystemMonitor.h">
+    <ClInclude Include="..\server-win\monitoring\LinuxSystemMonitor.h">
       <Filter>Header Files\monitoring</Filter>
+    </ClInclude>
+    <ClInclude Include="..\server-win\monitoring\SystemMonitor.h">
+      <Filter>Header Files\monitoring</Filter>
+    </ClInclude>
+    <ClInclude Include="..\server-win\logger\FileLogger.h">
+      <Filter>Header Files\logger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\server-win\logger\RequestLogger.h">
+      <Filter>Header Files\logger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\server-win\logger\ResponseLogger.h">
+      <Filter>Header Files\logger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\server-win\networking\Connection.h">
+      <Filter>Header Files\networking</Filter>
+    </ClInclude>
+    <ClInclude Include="..\server-win\networking\LinuxConnection.h">
+      <Filter>Header Files\networking</Filter>
+    </ClInclude>
+    <ClInclude Include="..\server-win\networking\LinuxSocket.h">
+      <Filter>Header Files\networking</Filter>
+    </ClInclude>
+    <ClInclude Include="..\server-win\networking\Socket.h">
+      <Filter>Header Files\networking</Filter>
+    </ClInclude>
+    <ClInclude Include="..\server-win\networking\ThreadPool.h">
+      <Filter>Header Files\networking</Filter>
+    </ClInclude>
+    <ClInclude Include="..\server-win\utils\DateTime.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\server-win\utils\Json.h">
+      <Filter>Header Files\utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\server\main.cpp">
+    <ClCompile Include="..\server-win\monitoring\LinuxSystemMonitor.cpp">
+      <Filter>Source Files\monitoring</Filter>
+    </ClCompile>
+    <ClCompile Include="..\server-win\monitoring\SystemMonitor.cpp">
+      <Filter>Source Files\monitoring</Filter>
+    </ClCompile>
+    <ClCompile Include="..\server-win\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\server\utils\DateTime.cpp">
+    <ClCompile Include="..\server-win\logger\FileLogger.cpp">
+      <Filter>Source Files\logger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\server-win\logger\RequestLogger.cpp">
+      <Filter>Source Files\logger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\server-win\logger\ResponseLogger.cpp">
+      <Filter>Source Files\logger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\server-win\networking\LinuxSocket.cpp">
+      <Filter>Source Files\networking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\server-win\networking\Socket.cpp">
+      <Filter>Source Files\networking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\server-win\networking\ThreadPool.cpp">
+      <Filter>Source Files\networking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\server-win\utils\DateTime.cpp">
       <Filter>Source Files\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\server\networking\Socket.cpp">
-      <Filter>Source Files\networking</Filter>
-    </ClCompile>
-    <ClCompile Include="..\server\networking\ThreadPool.cpp">
-      <Filter>Source Files\networking</Filter>
-    </ClCompile>
-    <ClCompile Include="..\server\logger\FileLogger.cpp">
-      <Filter>Source Files\logger</Filter>
-    </ClCompile>
-    <ClCompile Include="..\server\logger\RequestLogger.cpp">
-      <Filter>Source Files\logger</Filter>
-    </ClCompile>
-    <ClCompile Include="..\server\logger\ResponseLogger.cpp">
-      <Filter>Source Files\logger</Filter>
-    </ClCompile>
-    <ClCompile Include="..\server\monitoring\SystemMonitor.cpp">
-      <Filter>Source Files\monitoring</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
