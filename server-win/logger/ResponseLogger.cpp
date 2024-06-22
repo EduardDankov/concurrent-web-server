@@ -14,9 +14,11 @@ void logger::ResponseLogger::log(
 	const std::string clientAddr,
 	const nlohmann::json response)
 {
-	*m_os << "Thread #" << threadId << " - "
-		<< utils::DateTime::getUTC() << " - "
-		<< "[" << functionName << "] - "
-		<< "response to " << clientAddr << " - "
-		<< response.dump() << '\n';
+	std::stringstream ss;
+	ss << "Thread #" << threadId << " - "
+	   << utils::DateTime::getUTC() << " - "
+	   << "[" << functionName << "] - "
+	   << "response to " << clientAddr << " - "
+	   << response.dump();
+	FileLogger::log(ss.str());
 }

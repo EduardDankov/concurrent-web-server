@@ -8,6 +8,7 @@ namespace logger
 	{
 	protected:
 		std::unique_ptr<std::ofstream> m_os;
+		const std::filesystem::path m_filePath;
 
 	public:
 		FileLogger(const std::filesystem::path& path);

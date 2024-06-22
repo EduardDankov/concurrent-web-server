@@ -14,9 +14,11 @@ void logger::RequestLogger::log(
 	const std::string clientAddr,
 	const nlohmann::json request)
 {
-	*m_os << "Thread #" << threadId << " - "
-		  << utils::DateTime::getUTC() << " - " 
-		  << "[" << functionName << "] - "
-		  << "request from " << clientAddr << " - " 
-		  << request.dump() << '\n';
+	std::stringstream ss;
+	ss << "Thread #" << threadId << " - "
+	   << utils::DateTime::getUTC() << " - " 
+	   << "[" << functionName << "] - "
+	   << "request from " << clientAddr << " - " 
+	   << request.dump();
+	FileLogger::log(ss.str());
 }
