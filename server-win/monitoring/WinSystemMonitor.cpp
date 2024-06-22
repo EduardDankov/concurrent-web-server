@@ -39,10 +39,13 @@ DWORDLONG monitoring::WinSystemMonitor::fileTimeToInt64(const FILETIME& ft)
 void monitoring::WinSystemMonitor::updateCpuLoad()
 {
 	FILETIME idleTime, kernelTime, userTime;
-	m_cpuLoad = GetSystemTimes(&idleTime, &kernelTime, &userTime)
-		? calculateCpuLoad(fileTimeToInt64(idleTime), fileTimeToInt64(kernelTime) + fileTimeToInt64(userTime))
-		: -1.0f;
-	Sleep(s_intervalBetweenCpuUpdatesMs);
+	while (true)
+	{
+		m_cpuLoad = GetSystemTimes(&idleTime, &kernelTime, &userTime)
+			? calculateCpuLoad(fileTimeToInt64(idleTime), fileTimeToInt64(kernelTime) + fileTimeToInt64(userTime))
+			: -1.0f;
+		Sleep(s_intervalBetweenCpuUpdatesMs);
+	}
 }
 
 monitoring::WinSystemMonitor::WinSystemMonitor() : m_cpuLoad(0), m_cpuUpdateThread([this]() { updateCpuLoad(); }) {}
