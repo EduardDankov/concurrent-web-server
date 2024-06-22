@@ -97,7 +97,7 @@ void networking::LinuxSocket::handleConnection(std::shared_ptr<Connection> conne
 
 	logger::RequestLogger::getInstance()->log(
 		std::this_thread::get_id(), 
-		"networking::WinSocket::handleConnection", 
+		"networking::LinuxSocket::handleConnection", 
 		getClientIP(connection),
 		request
 	);
@@ -113,7 +113,7 @@ void networking::LinuxSocket::handleConnection(std::shared_ptr<Connection> conne
 
 	logger::ResponseLogger::getInstance()->log(
 		std::this_thread::get_id(),
-		"networking::WinSocket::handleConnection",
+		"networking::LinuxSocket::handleConnection",
 		getClientIP(connection),
 		responseString
 	);
