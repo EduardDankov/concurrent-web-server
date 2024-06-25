@@ -66,7 +66,7 @@
     <ClCompile Include="networking\ThreadPool.cpp">
       <Filter>Source Files\networking</Filter>
     </ClCompile>
-    <ClCompile Include="monitoring\SystemMonitor.cpp">
+    <ClCompile Include="monitoring\SystemMonitorFactory.cpp">
       <Filter>Source Files\monitoring</Filter>
     </ClCompile>
   </ItemGroup>
@@ -109,6 +109,9 @@
     </ClInclude>
     <ClInclude Include="utils\Json.h">
       <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="monitoring\SystemMonitorFactory.h">
+      <Filter>Header Files\monitoring</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

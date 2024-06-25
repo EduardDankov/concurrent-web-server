@@ -64,6 +64,12 @@ void monitoring::LinuxSystemMonitor::updateCpuLoad()
 
 monitoring::LinuxSystemMonitor::LinuxSystemMonitor() : m_cpuLoad(0), m_cpuUpdateThread([this]() { updateCpuLoad(); }) {}
 
+std::shared_ptr<monitoring::LinuxSystemMonitor> monitoring::LinuxSystemMonitor::getInstance()
+{
+	static std::shared_ptr<LinuxSystemMonitor> instance(new LinuxSystemMonitor);
+	return instance;
+}
+
 std::string monitoring::LinuxSystemMonitor::getCpuLoad()
 {
 	float currentLoad = std::round(m_cpuLoad * 100 * 100) / 100;

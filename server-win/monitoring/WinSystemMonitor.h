@@ -1,13 +1,14 @@
 #pragma once
-
 #ifdef _WIN32
 #include <string>
 #include <thread>
 #include <Windows.h>
 
+#include "SystemMonitor.h"
+
 namespace monitoring
 {
-	class WinSystemMonitor
+	class WinSystemMonitor : public SystemMonitor
 	{
 	protected:
 		static const DWORD s_intervalBetweenCpuUpdatesMs{ 100 };
@@ -19,13 +20,15 @@ namespace monitoring
 		float calculateCpuLoad(DWORDLONG idleTicks, DWORDLONG totalTicks);
 		DWORDLONG fileTimeToInt64(const FILETIME& ft);
 		// This function needs to be called at regular intervals to store the load between calls
-		void updateCpuLoad();
+		void updateCpuLoad() override;
+
+		WinSystemMonitor();
 
 	public:
-		WinSystemMonitor();
+		static std::shared_ptr<WinSystemMonitor> getInstance();
 		
-		std::string getCpuLoad();
-		std::string getMemoryUsage();
+		std::string getCpuLoad() override;
+		std::string getMemoryUsage() override;
 	};
 }
 

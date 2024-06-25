@@ -2,12 +2,12 @@
 
 #include "logger/FileLogger.h"
 #include "networking/Socket.h"
-#include "monitoring/SystemMonitor.h"
+#include "monitoring/SystemMonitorFactory.h"
 
 int main()
 {
 	// SystemMonitor instance has to be created before first connection for correct CPU usage measurement
-	monitoring::SystemMonitor::getInstance();
+	monitoring::SystemMonitorFactory::createSystemMonitor();
 	logger::FileLogger::createLogDir(constants::logDirPath);
 
 	while (true)

@@ -50,6 +50,12 @@ void monitoring::WinSystemMonitor::updateCpuLoad()
 
 monitoring::WinSystemMonitor::WinSystemMonitor() : m_cpuLoad(0), m_cpuUpdateThread([this]() { updateCpuLoad(); }) {}
 
+std::shared_ptr<monitoring::WinSystemMonitor> monitoring::WinSystemMonitor::getInstance()
+{
+	static std::shared_ptr<WinSystemMonitor> instance(new WinSystemMonitor);
+	return instance;
+}
+
 std::string monitoring::WinSystemMonitor::getCpuLoad()
 {
 	float currentLoad = std::round(m_cpuLoad * 100 * 100) / 100;

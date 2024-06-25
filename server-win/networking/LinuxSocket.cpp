@@ -9,7 +9,7 @@
 #include "ThreadPool.h"
 #include "../logger/RequestLogger.h"
 #include "../logger/ResponseLogger.h"
-#include "../monitoring/SystemMonitor.h"
+#include "../monitoring/SystemMonitorFactory.h"
 
 void networking::LinuxSocket::initializeSocket()
 {
@@ -67,8 +67,9 @@ nlohmann::json networking::LinuxSocket::generateResponse(const nlohmann::json re
 		}
 		if (request.at("message") == "getserverstatus")
 		{
-			std::string cpuUsage = monitoring::SystemMonitor::getInstance()->getCpuLoad();
-			std::string memoryUsage = monitoring::SystemMonitor::getInstance()->getMemoryUsage();
+			auto systemMonitor = monitoring::SystemMonitorFactory::createSystemMonitor();
+			std::string cpuUsage = systemMonitor->getCpuLoad();
+			std::string memoryUsage = systemMonitor->getMemoryUsage();
 			return {
 				{"cpuUsage", cpuUsage},
 				{"memoryUsage", memoryUsage}

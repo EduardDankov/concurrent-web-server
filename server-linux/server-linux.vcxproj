@@ -82,6 +82,7 @@
     <ClInclude Include="..\server-win\logger\ResponseLogger.h" />
     <ClInclude Include="..\server-win\monitoring\LinuxSystemMonitor.h" />
     <ClInclude Include="..\server-win\monitoring\SystemMonitor.h" />
+    <ClInclude Include="..\server-win\monitoring\SystemMonitorFactory.h" />
     <ClInclude Include="..\server-win\networking\Connection.h" />
     <ClInclude Include="..\server-win\networking\LinuxConnection.h" />
     <ClInclude Include="..\server-win\networking\LinuxSocket.h" />
@@ -96,7 +97,7 @@
     <ClCompile Include="..\server-win\logger\ResponseLogger.cpp" />
     <ClCompile Include="..\server-win\main.cpp" />
     <ClCompile Include="..\server-win\monitoring\LinuxSystemMonitor.cpp" />
-    <ClCompile Include="..\server-win\monitoring\SystemMonitor.cpp" />
+    <ClCompile Include="..\server-win\monitoring\SystemMonitorFactory.cpp" />
     <ClCompile Include="..\server-win\networking\LinuxSocket.cpp" />
     <ClCompile Include="..\server-win\networking\Socket.cpp" />
     <ClCompile Include="..\server-win\networking\ThreadPool.cpp" />
